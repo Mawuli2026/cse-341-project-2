@@ -2,9 +2,17 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/itemController');
 
-router.post('/', controller.createItem);
+// 🔐 Middleware to protect routes
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.status(401).json({ message: 'Unauthorized' });
+}
+
+// Apply protection to the appropriate routes
+router.post('/', isAuthenticated, controller.createItem);
 router.get('/', controller.getItems);
-router.put('/:id', controller.updateItem);
-router.delete('/:id', controller.deleteItem);
+router.put('/:id', isAuthenticated, controller.updateItem);
+router.delete('/:id', isAuthenticated, controller.deleteItem);
 
 module.exports = router;
+
