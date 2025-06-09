@@ -5,9 +5,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const GitHubStratergy = require('passport-github2').Strategy;
 const passport = require('passport'); 
 const connectDB = require('./config/db');
-require('./auth/passport'); // Initialize passport config
+require('./auth/passport'); 
 
 // Swagger setup
 const swaggerUi = require('swagger-ui-express');
