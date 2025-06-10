@@ -5,7 +5,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const GitHubStratergy = require('passport-github2').Strategy;
 const passport = require('passport'); 
 const connectDB = require('./config/db');
 require('./auth/passport'); 
@@ -43,6 +42,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/auth', require('./routes/authRoutes'));
 app.use('/api/items', require('./routes/itemRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api', require('./routes'));
 
 // Start the server
 const PORT = process.env.PORT || 3000;

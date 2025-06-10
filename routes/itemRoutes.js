@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/itemController');
 
+
 // 🔐 Middleware to protect routes
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) return next();
