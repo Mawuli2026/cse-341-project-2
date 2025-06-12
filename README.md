@@ -48,10 +48,10 @@ DELETE /api/users/:id
 
 # API Endpoints
 # 🔹 Items Routes: 
-GET = /api/items    = Get all items
-POST = /api/items   = Create new item
-PUT = /api/items:id    = Update item 
-DELETE = /api/items:id = Delete item
+GET = /api/items    
+POST = /api/items   
+PUT = /api/items:id    
+DELETE = /api/items:id 
 
 
 # 🔹 Users Routes
