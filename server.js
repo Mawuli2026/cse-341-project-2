@@ -7,6 +7,7 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport'); 
 const connectDB = require('./config/db');
+const MongoStore = require('connect-mongo');
 require('./auth/passport'); 
 
 // Swagger setup
@@ -27,7 +28,10 @@ app.use(
   session({
     secret: 'session-secret',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI, // Uses your existing MongoDB connection
+          })      
   })
 );
 
