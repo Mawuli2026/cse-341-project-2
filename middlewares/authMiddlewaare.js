@@ -1,5 +1,3 @@
-// middlewares/authMiddleware.js
-
 // Middleware to check if the user is logged in via Passport
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated && req.isAuthenticated()) {
