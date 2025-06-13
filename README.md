@@ -55,10 +55,10 @@ DELETE = /api/items:id
 
 
 # 🔹 Users Routes
-GET = /api/users = Get all users
-POST = /api/users = create new user
-PUT = /api/users:id = Update user
-DELETE = /api/users:id = Delete user
+GET = /api/users 
+POST = /api/users 
+PUT = /api/users:id 
+DELETE = /api/users:id 
 
 
  # Data Validation
@@ -82,4 +82,4 @@ OAuth login is managed through passport-google-oauth20
 
 Sessions are handled with express-session
 
-Protected routes return 401 Unauthorized if user is not authenticated
+Protected routes return 400 Unauthorized if user is not authenticated
