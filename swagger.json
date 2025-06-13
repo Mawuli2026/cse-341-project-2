@@ -3,209 +3,171 @@
   "info": {
     "title": "CSE 341 Project 2 API",
     "version": "1.0.0",
-    "description": "API for managing Items and Users."
+    "description": "A RESTful API for managing Items and Users, secured with Google OAuth."
   },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "cookieAuth": {
+      "type": "apiKey",
+      "in": "cookie",
+      "name": "connect.sid"
+    }
+  },
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ],
   "paths": {
-    "/api/items": {
+    "/items": {
       "get": {
         "summary": "Get all items",
         "responses": {
-          "200": {
-            "description": "List of items"
-          }
+          "200": { "description": "List of items" }
         }
       },
       "post": {
-        "summary": "Create an item",
-        "security": [{ "cookieAuth": [] }],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Item"
-              }
-            }
+        "summary": "Create a new item",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "item",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Item" }
           }
-        },
+        ],
         "responses": {
-          "201": {
-            "description": "Item created"
-          },
-          "400": {
-            "description": "Validation error"
-          }
+          "201": { "description": "Item created" },
+          "400": { "description": "Validation error" }
         }
       }
     },
-    "/api/items/{id}": {
+    "/items/{id}": {
       "put": {
         "summary": "Update an item",
-        "security": [{ "cookieAuth": [] }],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "item",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Item" }
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Item"
-              }
-            }
-          }
-        },
         "responses": {
-          "200": {
-            "description": "Item updated"
-          },
-          "404": {
-            "description": "Item not found"
-          }
+          "200": { "description": "Item updated" },
+          "404": { "description": "Item not found" }
         }
       },
       "delete": {
         "summary": "Delete an item",
-        "security": [{ "cookieAuth": [] }],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Item deleted"
-          },
-          "404": {
-            "description": "Item not found"
-          }
+          "200": { "description": "Item deleted" },
+          "404": { "description": "Item not found" }
         }
       }
     },
-    "/api/users": {
+    "/users": {
       "get": {
         "summary": "Get all users",
         "responses": {
-          "200": {
-            "description": "List of users"
-          }
+          "200": { "description": "List of users" }
         }
       },
       "post": {
-        "summary": "Create a user",
-        "security": [{ "cookieAuth": [] }],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
+        "summary": "Create a new user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "required": true,
+            "schema": { "$ref": "#/definitions/User" }
           }
-        },
+        ],
         "responses": {
-          "201": {
-            "description": "User created"
-          },
-          "400": {
-            "description": "Validation error"
-          }
+          "201": { "description": "User created" },
+          "400": { "description": "Validation error" }
         }
       }
     },
-    "/api/users/{id}": {
+    "/users/{id}": {
       "put": {
         "summary": "Update a user",
-        "security": [{ "cookieAuth": [] }],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "required": true,
+            "schema": { "$ref": "#/definitions/User" }
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          }
-        },
         "responses": {
-          "200": {
-            "description": "User updated"
-          },
-          "404": {
-            "description": "User not found"
-          }
+          "200": { "description": "User updated" },
+          "404": { "description": "User not found" }
         }
       },
       "delete": {
         "summary": "Delete a user",
-        "security": [{ "cookieAuth": [] }],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "User deleted"
-          },
-          "404": {
-            "description": "User not found"
-          }
+          "200": { "description": "User deleted" },
+          "404": { "description": "User not found" }
         }
       }
     }
   },
-  "components": {
-    "securitySchemes": {
-      "cookieAuth": {
-        "type": "apiKey",
-        "in": "cookie",
-        "name": "connect.sid"
-      }
-    },
-    "schemas": {
-      "Item": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "description": { "type": "string" },
-          "price": { "type": "number" },
-          "category": { "type": "string" },
-          "inStock": { "type": "boolean" },
-          "supplier": { "type": "string" },
-          "addedDate": { "type": "string", "format": "date-time" }
-        },
-        "required": ["name", "price"]
+  "definitions": {
+    "Item": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "inStock": { "type": "boolean" },
+        "supplier": { "type": "string" },
+        "addedDate": { "type": "string", "format": "date-time" }
       },
-      "User": {
-        "type": "object",
-        "properties": {
-          "username": { "type": "string" },
-          "email": { "type": "string" },
-          "createdAt": { "type": "string", "format": "date-time" }
-        },
-        "required": ["username", "email"]
-      }
+      "required": ["name", "price"]
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["username", "email"]
     }
   }
 }
