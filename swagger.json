@@ -5,9 +5,7 @@
     "version": "1.0.0",
     "description": "A RESTful API for managing Items and Users, secured with Google OAuth."
   },
-  "host": "localhost:3000",
   "basePath": "/api",
-  "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "securityDefinitions": {
